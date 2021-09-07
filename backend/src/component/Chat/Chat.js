@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { io } from "socket.io-client";
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
+import './Chat.css'
 const ENDPOINT = 'http://localhost:5000/'
 let socket;
 
@@ -32,14 +33,16 @@ const Chat = () => {
 
 		useEffect(() => {
 			socket.on('message', message => {
-				console.log(message)
 			  setMessages(messages => [ ...messages, message ]);
 			});
 			
 			socket.on("roomData", ({ users }) => {
-			  setUsers(users);
+				console.log(users,'USER')
+			  setUsers(users );
 			});
-		}, [message]);
+		}, []);
+		console.log(message, "MESSAGE")
+		console.log(messages, "MESSAGES")
 		const sendMessage = (event) => {
 			event.preventDefault();
 		
@@ -50,17 +53,25 @@ const Chat = () => {
 
 	return (
 		<>
-		<div>
+		<div className="outerContainer">
+		<div className="container">
+			<div className = "room_name">{ room }</div> 
+		<div className = "messages_section">
 		{
 			messages && messages.map( (item, key) =>{
-				return <div key = {key}>{item.text}</div>
+				console.log(item, "item")
+				return (<div key = {key}> {item?.user === name ? <span className= "userTextarea">{item?.message}</span> : 
+					<span className = "roomTextarea">{item?.message}</span>
+				}
+				 </div>)
 			})
 		}
 
 		</div>
 		
-			<form>
+		<form className="form">
 				<input
+				className="input"
 				type="text"
 				placeholder="Type a message..."
 				value={message}
@@ -69,6 +80,8 @@ const Chat = () => {
 				/>
 				<button className="sendButton" onClick={e => sendMessage(e)}>Send</button>
 			</form>
+			</div>
+			</div>
 		</>
 	)
 }
