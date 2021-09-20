@@ -17,7 +17,9 @@
   .messages_section{
     padding: 10px;
     overflow-y: scroll;
-    
+  }
+  .messages_section div{
+    margin: 10px 2px
   }
   .room_name{
     background-color: green;
@@ -26,18 +28,18 @@
     padding: 10px;
    
   }
-  .userTextarea{
+  .usermessage{
     display: grid;
     justify-items: flex-end;
+    color: green;
     font-weight: bold;
     line-height: 1;
     padding: 2px;
     border-radius: 4px;
     word-wrap: break-word;
 }
-  .roomTextarea{
-    background-color: #c4c0f3;
-    color: white;
+  .clientmessage{
+    color: red;
     font-weight: bold;
     line-height: 1;
     padding: 2px;
