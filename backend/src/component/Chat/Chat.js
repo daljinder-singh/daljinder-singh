@@ -6,7 +6,7 @@ import Messages from '../Messages/Messages';
 import MessageBox from '../MessageBox/MessageBox';
 import { useSelector } from 'react-redux';
 import './Chat.css'
-const ENDPOINT = 'http://localhost:4042/'
+const ENDPOINT = '4042/'
 let socket;
 
 const Chat = () => {
@@ -20,7 +20,7 @@ const Chat = () => {
 
 	useEffect(() => {
 		const { name, room } = queryString.parse(location.search)
-		socket = io(ENDPOINT)
+		socket = io(`http://192.168.10.217:${ENDPOINT}`)
 		setRoom(room)
 		setName(name)
 		socket.emit('newUser', { name, room }, error => {
@@ -35,13 +35,8 @@ const Chat = () => {
 			socket.on('message', message => {
 			     if(typeof message !== 'undefined')setMessages(messages => [ ...messages, message ]);
 			});
-			
-	// 		socket.on("roomData", ({ users }) => {
-	// 			console.log(users,'USER')
-	// 		  setUsers(users );
-	// 		});
 	 	}, []);
-		 useEffect( () =>{
+		 useEffect(() =>{
 			socket.emit('sendMessage', selector);
 		 },[selector])
 
@@ -50,7 +45,7 @@ const Chat = () => {
 			<div className="outerContainer">
 				<div className="container">
 					<div className="room_name">{Room}</div>
-					<Messages messages={messages} name = {Name} />
+					<Messages messages = {messages} name = {Name} />
 					<MessageBox />
 				</div>
 			</div>
@@ -60,4 +55,4 @@ const Chat = () => {
 
 
 
-export default Chat;
+export default React.memo(Chat);

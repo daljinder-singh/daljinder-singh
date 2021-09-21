@@ -17,9 +17,6 @@ const addUser = ({name, room, id}) =>{
 
 const getUser = (clientData) => users.find( (user) => user.id === clientData)
 
-
-
-
 // const getUsersInRoom = (room) => users.find( (user) => user.room === room)
 
 module.exports = {addUser, getUser }

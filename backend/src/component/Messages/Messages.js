@@ -9,18 +9,6 @@ const Messages = ({ messages, name }) => {
         startScroll()
     },[messages])
 
-// function startScroll(){
-//     let id = setInterval(function() {
-//         DOM.scrollBy(0, 2);
-//         if ((DOM.innerHeight + DOM.scrollY) >= document.body.offsetHeight) {
-//             // Reached end of page
-//             stopScroll();
-//         }
-//     }, interval);
-//     return id;
-
-// }
-
 const startScroll = () =>{
     const DOM = document.querySelector('.messages_section')
     let id = setInterval( ()=>{
@@ -31,29 +19,7 @@ const startScroll = () =>{
         }
         
     }, interval);
-    // return id
 }
-
-// function stopScroll() {
-//     clearInterval(startScroll());
-    
-//     console.log('stop')
-// }
-
-// document.body.addEventListener('keypress', function (event)
-// {
-//     if (event.which == 13 || event.keyCode == 13) {
-//         // It's the 'Enter' key
-//         if(paused == true) {
-//             scrollerID = startScroll();
-//             paused = false;
-//         }
-//         else {
-//             stopScroll();
-//             paused = true;
-//         }
-//     }
-// }, true);
     return (
         <div className="messages_section">
             {
