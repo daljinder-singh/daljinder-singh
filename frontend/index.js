@@ -24,7 +24,6 @@ io.on('connect', (socket) => {
     if(error) return callback(error);
 
     socket.join(user.room);
-    console.log(user)
     socket.emit('message', { text: `${user.name}`, room: `${user.room}`});
     socket.broadcast.to(user.room).emit('message', { text: `${user.name} has joined!` });
 
@@ -35,10 +34,8 @@ io.on('connect', (socket) => {
 
   socket.on('sendMessage', (message, callback) => {
     const user = getUser(socket.id);
-     console.log(user , socket.id, message)
 
     io.to(user.room).emit('message', { user: user.name, message: `${message}` });
-     console.log(user.room)
 
     callback();
   });
@@ -56,3 +53,5 @@ io.on('connect', (socket) => {
 server.listen(port, () =>{
     console.log(`port is running ${port}`)
 })
+
+

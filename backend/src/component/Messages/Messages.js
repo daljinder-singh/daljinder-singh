@@ -23,13 +23,10 @@ const Messages = ({ messages, name }) => {
 
 const startScroll = () =>{
     const DOM = document.querySelector('.messages_section')
-    console.log('outside')
     let id = setInterval( ()=>{
-      console.log('setineval')
         const scrollHight = DOM.scrollHeight - Math.abs(DOM.scrollTop)
         DOM.scrollBy(0, 20)
         if((DOM.clientHeight ) === scrollHight){
-            console.log('stop')
             clearInterval(id);
         }
         

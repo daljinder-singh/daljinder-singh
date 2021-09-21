@@ -6,7 +6,7 @@ import Messages from '../Messages/Messages';
 import MessageBox from '../MessageBox/MessageBox';
 import { useSelector } from 'react-redux';
 import './Chat.css'
-const ENDPOINT = 'http://localhost:500/'
+const ENDPOINT = 'http://localhost:4042/'
 let socket;
 
 const Chat = () => {
@@ -14,20 +14,9 @@ const Chat = () => {
 
 	const [Name, setName] = useState('');
 	const [Room, setRoom] = useState('');
-	const [users, setUsers] = useState('');
-	const [Client, setClient] = useState('');
-	const [messages, setMessages] = useState([
-		{message: 'l, welcome to room no'},{message: 'l, welcome to room no'},
-		{user: 'l', message: 'sss'},
-		{user: 'l', message: 'sss'},{user: 'l', message: 'sss'},{user: 'l', message: 'sss'}
-		,{user: 'l', message: 'sss'},{user: 'l', message: 'sss'},{user: 'l', message: 'sss'}
-		,{user: 'l', message: 'sss'},{user: 'l', message: 'sss'}
-	]);
-
+	const [messages, setMessages] = useState([]);
 
 	const location = useLocation();
-
-
 
 	useEffect(() => {
 		const { name, room } = queryString.parse(location.search)
@@ -39,6 +28,7 @@ const Chat = () => {
 				alert(error)
 			}
 		})
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ENDPOINT, location.search]);
 
 	 	useEffect(() => {
